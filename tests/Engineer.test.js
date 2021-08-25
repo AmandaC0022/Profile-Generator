@@ -1,4 +1,2 @@
-//Engineer will extend Employee but also have: 
-// github
-// getGithub() 
-// getRole() 
+ 
+const engineer = require('./lib/Engineer.js'); 

@@ -1,1 +1,1 @@
-const manager = require('./lib/Manager.js');
+// const manager = require('lib/Manager.js');

@@ -35,7 +35,7 @@ const generateTeam = (team) => {
     htmlArr.push(
         // this grabs just those with the role of manager 
         team
-            .filter((employee) => employee.role === 'Manager') 
+            .filter((employee) => employee.getRole() === 'Manager') 
             //this goes over each index in the array and runs generateManager on each ith element or manager
             .map((manager) => generateManager(manager)) 
             .join("")
@@ -44,7 +44,7 @@ const generateTeam = (team) => {
     htmlArr.push(
         // this grabs just those with the role of engineer 
         team
-            .filter((employee) => employee.role === 'Engineer') 
+            .filter((employee) => employee.getRole() === 'Engineer') 
             .map((engineer) => generateEngineer(engineer)) 
             .join("")
     ); 
@@ -52,7 +52,7 @@ const generateTeam = (team) => {
     htmlArr.push(
         // this grabs just those with the role of manager 
         team
-            .filter((employee) => employee.role === 'Intern') 
+            .filter((employee) => employee.getRole() === 'Intern') 
             //this goes over each index in the array and runs generateManager on each ith element or manager
             .map((intern) => generateIntern(intern)) 
             .join("")

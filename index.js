@@ -84,7 +84,7 @@ function init() {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber); 
         team.push (manager); 
         writeFile(team); 
-        // idArray.push(answers.managerId); 
+        idArray.push(answers.managerId); 
         createTeam(); 
     })
 }
@@ -133,9 +133,13 @@ function addEngineer() {
                     /^[1-9]\d*$/
                 ); 
                 if (pass) {
-                    return true; 
+                    if (idArray.includes(answer)) {
+                        return "This ID is already taken. Please enter another."
+                    } else {
+                        return true; 
+                    }
                 } 
-                return "Please enter at least one positive number."
+                return "Please enter at least one positive number."; 
             }
             
         },
@@ -168,7 +172,7 @@ function addEngineer() {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub); 
         team.push (engineer); 
         writeFile(team); 
-        // idArray.push(answers.managerId); 
+        idArray.push(answers.engineerId); 
         createTeam();
     }); 
 }; 
@@ -195,11 +199,14 @@ function addIntern() {
                     /^[1-9]\d*$/
                 ); 
                 if (pass) {
-                    return true; 
+                    if (idArray.includes(answer)) {
+                        return "This ID is already taken. Please enter another."
+                    } else {
+                        return true; 
+                    }
                 } 
-                return "Please enter at least one positive number."
+                return "Please enter at least one positive number."; 
             }
-            
         },
         {
             type: "input", 

@@ -1,7 +1,14 @@
 // this brings in the HTML template from the other page  
 const render = require('./src/page-template'); 
+const fs = require("fs"); 
+const path = require("path"); 
 
-//We are hard coding this right now. This will be generated later from the command line prompts 
+//this creates a path to the dist folder / __dirname is a node method 
+const OUTPUT_DIR = path.resolve(__dirname, "dist"); 
+//this takes the path to the dist folder and then jois index.html to it 
+const outputPath = path.join(OUTPUT_DIR, "index.html"); 
+
+//We are hard coding this right now. This will be generated later from the command line prompts with inquirer
 const team = [ 
     {
         name: 'Amanda', 
@@ -22,6 +29,6 @@ const team = [
         role: 'intern',
     }
 ]
-
-console.log(render(team)); 
+//this writes the code from render(team) to the index.html file 
+fs.writeFileSync(outputPath, render(team), 'utf-8'); 
 

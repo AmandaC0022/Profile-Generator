@@ -1,16 +1,44 @@
 const generateTeam = (team) => {
-    const generateManager = manager => {
+    const generateManager = (manager) => {
         return `
-        <h2 class="card-title">${manager.getName()}</h2>
+        <h2 class="card-title">${manager.name}</h2>
         <ul class="list-group">
-                <li class="list-group-item">ID: ${manager.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
+                <li class="list-group-item">ID: ${manager.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
         </ul>
         `;
+        //this is from the original mock up: 
+        // <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
     };
+    const generateEngineer = (engineer) => {
+        return `
+        <h2 class="card-title">${engineer.name}</h2>
+        <ul class="list-group">
+                <li class="list-group-item">ID: ${engineer.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
+        </ul>
+        `;
+    }; 
     //the temperate literals of the different people will be put into this array 
-    const htmlArr = ["foo", "bar"]; 
+    const htmlArr = []
+
+    htmlArr.push(
+        // this grabs just those with the role of manager 
+        team
+            .filter((employee) => employee.role === 'manager') 
+            //this goes over each index in the array and runs generateManager on each ith element or manager
+            .map((manager) => generateManager(manager)) 
+            .join("")
+    ); 
+
+    htmlArr.push(
+        // this grabs just those with the role of engineer 
+        team
+            .filter((employee) => employee.role === 'engineer') 
+            .map((engineer) => generateEngineer(engineer)) 
+            .join("")
+    ); 
+
     //this joins the arrays into a string so it shows up on the command line 
     return htmlArr.join("");  
 
@@ -18,7 +46,7 @@ const generateTeam = (team) => {
 }; 
 
 module.exports = (team) => {
-`<!DOCTYPE html>
+return `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,7 +56,7 @@ module.exports = (team) => {
     <title>My Team</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./dist/style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/c502137733.js"></script>
 </head>
 
@@ -48,6 +76,5 @@ module.exports = (team) => {
         </div>
     </div>
 </body>
-</html>
-`;
-}; 
+</html>`;
+} 

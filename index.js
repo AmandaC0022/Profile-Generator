@@ -16,6 +16,9 @@ const outputPath = path.join(OUTPUT_DIR, "index.html");
 //empty team members array that will polluate with the inquirer prompts 
 const team = []; 
 
+//stores all of the used ID numbers 
+const idArray = []; 
+
 //this writes the code from render(team) to the index.html file 
 function writeFile(team) {
     fs.writeFileSync(outputPath, render(team), 'utf-8'); 
@@ -154,31 +157,82 @@ function addEngineer() {
             type: "input", 
             name: "engineerGithub",
             message: "What is the Github username of your Engineer?", 
-        },
-}
+            validate: answer => {
+                if (answer !== "") {
+                    return true; 
+                } 
+                return "Please enter at least one character."
+            }
+        }
+    ]).then(answers => {
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub); 
+        team.push (engineer); 
+        writeFile(team); 
+        // idArray.push(answers.managerId); 
+        createTeam();
+    }); 
+}; 
 
 function addIntern() {
     inquirer.prompt ([
         {
-            type: "list", 
-            name: "memberChoice",
-            message: "What type of team member would you like to add?", 
-            choices: ["Engineer", "Intern", "I don't want to add any more members."]
+            type: "input", 
+            name: "internName",
+            message: "What is the name of your Intern?", 
+            validate: answer => {
+                if (answer !== "") {
+                    return true; 
+                } 
+                return "Please enter at least one character."
+            }
+        },
+        {
+            type: "input", 
+            name: "internId",
+            message: "What is the ID of your Intern?", 
+            validate: answer => {
+                const pass = answer.match(
+                    /^[1-9]\d*$/
+                ); 
+                if (pass) {
+                    return true; 
+                } 
+                return "Please enter at least one positive number."
+            }
+            
+        },
+        {
+            type: "input", 
+            name: "internEmail",
+            message: "What is the email address of your Intern?", 
+            validate: answer => {
+                const pass = answer.match(
+                    /\S+@\S+\.\S+/ 
+                )
+                if (pass) {
+                    return true; 
+                } 
+                return "Please enter a valid email address."
+            }
+        },
+        {
+            type: "input", 
+            name: "internSchool",
+            message: "What school is your Intern from?", 
+            validate: answer => {
+                if (answer !== "") {
+                    return true; 
+                } 
+                return "Please enter at least one character."
+            }
         }
-}
+    ]).then(answers => {
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool); 
+        team.push (intern); 
+        writeFile(team); 
+        idArray.push(answers.internId); 
+        createTeam();
+    }); 
+}; 
 
 init()
-
-// switch statement: 
-// .then(userChoice => {
-//     switch(userChoice.memberChoice) {
-//         case "Engineer": 
-//             addEngineer(); 
-//             break; 
-//         case "Intern":
-//             addIntern(); 
-//             break; 
-//         default: 
-//             buildTeam(); 
-//     }
-// })

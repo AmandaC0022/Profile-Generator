@@ -19,7 +19,17 @@ const generateTeam = (team) => {
         </ul>
         `;
     }; 
-    //the temperate literals of the different people will be put into this array 
+
+    const generateIntern = (intern) => {
+        return `
+        <h2 class="card-title">${intern.name}</h2>
+        <ul class="list-group">
+                <li class="list-group-item">ID: ${intern.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
+        </ul>
+        `;
+    }; 
+    
     const htmlArr = []
 
     htmlArr.push(
@@ -38,11 +48,19 @@ const generateTeam = (team) => {
             .map((engineer) => generateEngineer(engineer)) 
             .join("")
     ); 
+    
+    htmlArr.push(
+        // this grabs just those with the role of manager 
+        team
+            .filter((employee) => employee.role === 'intern') 
+            //this goes over each index in the array and runs generateManager on each ith element or manager
+            .map((intern) => generateIntern(intern)) 
+            .join("")
+    ); 
 
     //this joins the arrays into a string so it shows up on the command line 
     return htmlArr.join("");  
-
-    //TO DO: make more of generateManager functions for Engineer and Intern 
+ 
 }; 
 
 module.exports = (team) => {

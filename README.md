@@ -44,3 +44,4 @@ I have tests in the tests folder that check to make sure the get functions are w
 Please contact me using my GitHub profile: AmandaC0022
 
 ## Video of Deployed Application 
+[![Walkthrough Video]({image-url})]({https://drive.google.com/file/d/1XpIk67QYMg7sjU8iFueabOpMiwssLfhq/view} "Profile Generator Walkthrough Video")

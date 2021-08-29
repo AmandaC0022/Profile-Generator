@@ -25,7 +25,7 @@ function writeFile(team) {
 }
 
 function init() {
-    //inquirer code 
+    //inquirer code for Manager 
     inquirer.prompt ([
         {
             type: "input", 
@@ -90,6 +90,7 @@ function init() {
 }
 
 function createTeam() {
+    // this gives the user a choice to add a new Intern or Engineer or exit the program 
     inquirer.prompt ([
         {
             type: "list", 
@@ -106,11 +107,12 @@ function createTeam() {
                     addIntern(); 
                     break; 
                 default: 
-                    buildTeam(); 
+                    writeFile(team);
             }
         })
 }
 
+//inquirer code for Engineer 
 function addEngineer() {
     inquirer.prompt ([
         {
@@ -170,13 +172,12 @@ function addEngineer() {
         }
     ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub); 
-        team.push (engineer); 
-        writeFile(team); 
+        team.push (engineer);  
         idArray.push(answers.engineerId); 
         createTeam();
     }); 
 }; 
-
+//inquirer code for Intern 
 function addIntern() {
     inquirer.prompt ([
         {

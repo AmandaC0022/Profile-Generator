@@ -2,6 +2,8 @@ const generateTeam = (team) => {
     const generateManager = (manager) => {
         return `
         <h2 class="card-title">${manager.getName()}</h2>
+        <i class="fas fa-users"></i>
+        <h4>Manager</h4> 
         <ul class="list-group">
             <li class="list-group-item">ID: ${manager.getId()}</li>
             <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
@@ -12,6 +14,8 @@ const generateTeam = (team) => {
     const generateEngineer = (engineer) => {
         return `
         <h2 class="card-title">${engineer.getName()}</h2>
+        <i class="fas fa-cogs"></i>
+        <h4>Engineer</h4> 
         <ul class="list-group">
             <li class="list-group-item">ID: ${engineer.getId()}</li>
             <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
@@ -22,6 +26,8 @@ const generateTeam = (team) => {
     const generateIntern = (intern) => {
         return `
         <h2 class="card-title">${intern.getName()}</h2>
+        <i class="fas fa-user-graduate"></i>
+        <h4>Intern</h4> 
         <ul class="list-group">
             <li class="list-group-item">ID: ${intern.getId()}</li>
             <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
